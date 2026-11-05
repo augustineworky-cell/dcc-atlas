@@ -1,0 +1,17 @@
+/* DCC Atlas settings. Safe to edit. The key below is a public (publishable) key. */
+window.ATLAS_CONFIG = {
+  // Staffly's Supabase project: Atlas signs people in through Staffly's own login.
+  stafflyUrl: "https://bpwpxhsdmbkymhpjsfej.supabase.co",
+  stafflyKey: "sb_publishable_-CSLD4npu9crafP-Rq7-Ug_IZN2Zh1_",
+
+  // The apps shown on the home screen. status: "live" opens the app, "soon" shows Coming soon.
+  // Put each app's web address in "url". An empty url shows a "not set yet" message.
+  apps: [
+    { id: "staffly", name: "Staffly", desc: "Attendance, leave and payroll for every location.", url: "", status: "live", icon: "pin", tint: "#e4f1ef", color: "#0f766e" },
+    { id: "o2d", name: "Order to Dispatch", desc: "From PO to delivery, step by step. Okhla and Gurgaon.", url: "https://dcc-order-to-dispatch.vercel.app", status: "live", icon: "truck", tint: "#fdecef", color: "#c8102e" },
+    { id: "stock", name: "Stock", desc: "What is on the shelf, in every warehouse.", url: "", status: "soon", icon: "stock", tint: "#efefea", color: "#8a8a93" },
+    { id: "purchase", name: "Purchase FMS", desc: "Purchase orders and follow-ups.", url: "", status: "soon", icon: "cart", tint: "#efefea", color: "#8a8a93" },
+    { id: "collections", name: "Collections", desc: "Who owes what, and who to call.", url: "", status: "soon", icon: "wallet", tint: "#efefea", color: "#8a8a93" },
+    { id: "brand", name: "Brand portal", desc: "Each brand sees only its own sales.", url: "", status: "soon", icon: "chart", tint: "#efefea", color: "#8a8a93" }
+  ]
+};

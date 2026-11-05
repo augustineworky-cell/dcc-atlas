@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Atlas · DCC Supply Chain</title>
+<meta name="theme-color" content="#f7f7f4">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- sign in -->
+<section id="login" class="lg hidden">
+  <div class="lg-left">
+    <div class="form">
+      <img class="logo" src="icons/icon.svg" width="46" height="46" alt="Atlas">
+      <h1 class="h1">Sign in to Atlas</h1>
+      <p class="mut" style="font-size:15px;line-height:1.55;margin:0">Use the same Employee ID and password as Staffly. You sign in once and every app opens.</p>
+      <form id="loginForm" class="beam fc" autocomplete="on">
+        <label class="f">Employee ID<input class="inp" id="eid" placeholder="e.g. DCC214" autocomplete="username" autocapitalize="characters" spellcheck="false" required></label>
+        <label class="f">Password<input class="inp" id="pw" type="password" placeholder="Your Staffly password" autocomplete="current-password" required></label>
+        <div class="err" id="loginErr" role="alert"></div>
+        <button class="btn" id="loginBtn" type="submit">Sign in</button>
+      </form>
+      <p class="mut" style="font-size:13px;margin-top:22px;line-height:1.55">Forgot your password? Ask Robin in MIS.</p>
+    </div>
+  </div>
+  <div class="lg-right" aria-hidden="true">
+    <svg class="topo" viewBox="0 0 640 640" preserveAspectRatio="xMidYMid slice" fill="none">
+      <path d="M60 330 C 120 120, 360 80, 500 170 S 700 320, 640 460 S 380 600, 210 540 S 10 470, 60 330z" stroke="#dcdcd5" stroke-width="1.2" style="--len:2100;stroke-dasharray:2100"/>
+      <path d="M130 330 C 180 190, 360 160, 470 220 S 640 320, 600 430 S 380 540, 250 500 S 90 440, 130 330z" stroke="#dcdcd5" stroke-width="1.2" style="--len:1700;stroke-dasharray:1700;animation-delay:.2s"/>
+      <path d="M210 330 C 240 250, 360 230, 430 270 S 550 330, 530 400 S 380 470, 290 440 S 180 400, 210 330z" stroke="#c8102e" stroke-opacity=".5" stroke-width="1.4" style="--len:1200;stroke-dasharray:1200;animation-delay:.5s"/>
+    </svg>
+    <div class="stack" id="loginApps"></div>
+  </div>
+</section>
+
+<!-- home -->
+<div id="app" class="at hidden">
+  <header class="nav">
+    <a class="brand" href="#/home"><img src="icons/icon.svg" width="34" height="34" alt="">Atlas</a>
+    <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="gs" placeholder="Jump to an app…" aria-label="Search apps" autocomplete="off"><span class="kbd">Ctrl K</span></label>
+    <div class="me"><div class="av" id="meAv"></div><div><b id="meName" style="font-weight:600"></b><div id="meSub" style="color:var(--mute);font-size:12px"></div></div><button class="ib" id="signOut" aria-label="Sign out" title="Sign out"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></button></div>
+  </header>
+  <main class="wrap" id="view"></main>
+</div>
+
+<!-- app in a frame -->
+<div id="frameView" class="fr hidden">
+  <header class="bar">
+    <a class="back" href="#/home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><img src="icons/icon.svg" width="24" height="24" alt="">Atlas</a>
+    <span class="sep"></span>
+    <span class="ic" id="frIcon"></span>
+    <b id="frName" style="font-weight:600;font-size:15px"></b>
+    <span class="chip ok" id="frChip">Signed in via Atlas</span>
+    <div style="flex:1"></div>
+    <a class="sw" id="frNew" href="#" target="_blank" rel="noopener">Open in new tab ↗</a>
+    <div class="menu"><button class="sw" id="swBtn" type="button" aria-haspopup="true" aria-expanded="false">Switch app</button><div class="pop hidden" id="swPop"></div></div>
+    <div class="av sm" id="frAv"></div>
+  </header>
+  <div class="stage"><div class="frame beam"><iframe id="frFrame" title="App" allow="geolocation; camera; microphone; clipboard-write; fullscreen"></iframe></div></div>
+</div>
+
+<div id="toast" class="toast hidden" role="status"></div>
+
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
