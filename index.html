@@ -19,13 +19,26 @@
   <div class="lg-left">
     <div class="form">
       <div class="lgbrand"><img class="logo" src="icons/icon.svg" width="46" height="46" alt=""><span class="wm big" aria-label="atlas"><i>a</i><i>t</i><i>l</i><i>a</i><i>s</i></span></div>
-      <h1 class="h1">Sign in to Atlas</h1>
-      <p class="mut" style="font-size:15px;line-height:1.55;margin:0">Use the same Employee ID and password as Staffly. You sign in once and every app opens.</p>
+      <h1 class="h1" id="lgTitle">Sign in to Atlas</h1>
+      <p class="mut" id="lgSub" style="font-size:15px;line-height:1.55;margin:0">Use the same Employee ID and password as Staffly. You sign in once and every app opens.</p>
       <form id="loginForm" class="beam fc" autocomplete="on">
         <label class="f">Employee ID<input class="inp" id="eid" placeholder="e.g. DCC214" autocomplete="username" autocapitalize="characters" spellcheck="false" required></label>
         <label class="f">Password<input class="inp" id="pw" type="password" placeholder="Your Staffly password" autocomplete="current-password" required></label>
         <div class="err" id="loginErr" role="alert"></div>
         <button class="btn" id="loginBtn" type="submit">Sign in</button>
+      </form>
+      <form id="pinForm" class="beam fc hidden" autocomplete="off">
+        <label class="f">Your 4-digit PIN<input class="inp pinin" id="pinIn" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="off" required></label>
+        <div class="err" id="pinErr" role="alert"></div>
+        <button class="btn" id="pinBtn" type="submit">Open Atlas</button>
+        <div class="lnks"><button class="lnk" id="forgotPin" type="button">Forgot PIN?</button><button class="lnk" id="notYou" type="button">Not you?</button></div>
+      </form>
+      <form id="setForm" class="beam fc hidden" autocomplete="off">
+        <label class="f">New PIN<input class="inp pinin" id="pin1" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="new-password" required></label>
+        <label class="f">Type it again<input class="inp pinin" id="pin2" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" placeholder="••••" autocomplete="new-password" required></label>
+        <div class="err" id="setErr" role="alert"></div>
+        <button class="btn" id="setBtn" type="submit">Save PIN</button>
+        <div class="lnks"><button class="lnk" id="skipPin" type="button">Skip for now</button></div>
       </form>
       <p class="mut" style="font-size:13px;margin-top:22px;line-height:1.55">Forgot your password? Ask Robin in MIS.</p>
     </div>

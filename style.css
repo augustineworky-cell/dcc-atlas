@@ -138,3 +138,9 @@ label.f{display:grid;gap:7px;font:500 13px Inter;color:var(--ink2)}
 .wm.big{font-size:34px}
 .back .wm{font-size:17px}
 .lgbrand{display:flex;align-items:center;gap:14px}
+
+.pinin{text-align:center;font-size:24px;letter-spacing:.7em;padding-left:.7em}
+.pinin::placeholder{letter-spacing:.5em}
+.lnks{display:flex;justify-content:space-between;gap:12px}
+.lnk{background:none;border:0;padding:4px 0;font:500 13px Inter;color:var(--mute);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:var(--ink)}

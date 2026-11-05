@@ -172,11 +172,76 @@
   });
   $("frFrame").addEventListener("load", function () { if ($("frFrame").src !== "about:blank") sendSession(); });
 
+
+  /* ---------- 4-digit PIN (same method as Staffly: PIN is tied to this device) ---------- */
+  var DEV = "atlas.device", pending = false, forceSet = false;
+  function getDev() { try { return JSON.parse(localStorage.getItem(DEV) || "null"); } catch (e) { return null; } }
+  function setDev(d) { try { localStorage.setItem(DEV, JSON.stringify(d)); } catch (e) {} }
+  function clearDev() { try { localStorage.removeItem(DEV); } catch (e) {} }
+  function lgMode(m) {
+    var dev = getDev(), first = dev && dev.name ? String(dev.name).split(" ")[0] : "";
+    $("loginForm").classList.toggle("hidden", m !== "password");
+    $("pinForm").classList.toggle("hidden", m !== "pin");
+    $("setForm").classList.toggle("hidden", m !== "set");
+    var t = { password: ["Sign in to Atlas", "Use the same Employee ID and password as Staffly. You sign in once and every app opens."],
+      pin: ["Welcome back" + (first ? ", " + first : ""), "Enter your 4-digit PIN to open Atlas."],
+      set: ["Set a 4-digit PIN", "Next time, open Atlas with this PIN instead of your password. If you forget it, sign in with your password and set a new one."] }[m];
+    $("lgTitle").textContent = t[0]; $("lgSub").textContent = t[1];
+    ["loginErr", "pinErr", "setErr"].forEach(function (i) { $(i).textContent = ""; });
+    var f = { password: "eid", pin: "pinIn", set: "pin1" }[m];
+    setTimeout(function () { try { $(f).focus(); } catch (e) {} }, 60);
+  }
+  function showLogin() { var d = getDev(); lgMode(d && d.secret ? "pin" : "password"); }
+  function enter() { pending = false; forceSet = false; location.hash = "#/home"; route(); }
+  function deviceLabel() { return "Atlas on " + (/Mobi|Android|iPhone/i.test(navigator.userAgent) ? "phone" : "PC"); }
+
+  $("pinIn").addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); if (this.value.length === 4) $("pinForm").requestSubmit(); });
+  $("pin1").addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); });
+  $("pin2").addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); });
+
+  $("pinForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var dev = getDev(), er = $("pinErr"), b = $("pinBtn"), pin = $("pinIn").value;
+    if (!dev || pin.length !== 4) return;
+    er.textContent = ""; b.disabled = true;
+    var r = await db.rpc("app_login_pin", { p_device_secret: dev.secret, p_pin: pin });
+    b.disabled = false; $("pinIn").value = "";
+    var d = r.data || {};
+    if (r.error) { er.textContent = "Cannot reach the server. Check your internet."; return; }
+    if (d.status === "SUCCESS" && d.token) {
+      S = { token: d.token, expires_at: d.expires_at, employee_id: d.employee_id, employee_name: d.employee_name, role: d.role };
+      save(S); return enter();
+    }
+    if (d.status === "PIN_LOCKED") { forceSet = true; lgMode("password"); $("loginErr").textContent = "PIN locked after too many wrong tries. Sign in with your password and set a new PIN."; return; }
+    if (d.status === "INVALID_DEVICE") { clearDev(); lgMode("password"); $("loginErr").textContent = "Please sign in with your password and set a PIN again."; return; }
+    er.textContent = d.attempts_left != null ? "Wrong PIN. " + d.attempts_left + " tries left." : "Wrong PIN.";
+    try { $("pinIn").focus(); } catch (x) {}
+  });
+  $("forgotPin").addEventListener("click", function () { forceSet = true; lgMode("password"); });
+  $("notYou").addEventListener("click", function () { clearDev(); lgMode("password"); });
+  $("skipPin").addEventListener("click", enter);
+  $("setForm").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var er = $("setErr"), b = $("setBtn"), p1 = $("pin1").value, p2 = $("pin2").value;
+    if (!/^\d{4}$/.test(p1)) { er.textContent = "PIN must be exactly 4 digits."; return; }
+    if (p1 !== p2) { er.textContent = "The two PINs do not match."; return; }
+    er.textContent = ""; b.disabled = true;
+    var r = await db.rpc("app_register_device", { p_token: S.token, p_pin: p1, p_label: deviceLabel() });
+    b.disabled = false;
+    var d = r.data || {};
+    if (r.error) { er.textContent = "Could not save the PIN. Try again."; return; }
+    if (d.status === "SUCCESS" && d.device_secret) {
+      setDev({ secret: d.device_secret, emp: String(d.employee_id || S.employee_id).toLowerCase(), name: d.employee_name || S.employee_name });
+      toast("PIN saved. Use it next time."); return enter();
+    }
+    er.textContent = d.message || "That PIN was not accepted. Try another.";
+  });
+
   /* ---------- routing ---------- */
   function route() {
     var h = location.hash || "";
     $("swPop").classList.add("hidden");
-    if (!S) { show("login"); document.title = "Atlas · DCC Supply Chain"; return; }
+    if (!S || pending) { show("login"); document.title = "Atlas · DCC Supply Chain"; if (!pending) showLogin(); return; }
     $("meName").textContent = S.employee_name || ""; $("meSub").textContent = S.employee_id || "";
     $("meAv").textContent = initials(S.employee_name);
     var m = h.match(/^#\/app\/([\w-]+)/);
@@ -206,7 +271,9 @@
       var d = await signIn($("eid").value.trim(), $("pw").value);
       S = { token: d.token, expires_at: d.expires_at, employee_id: d.employee_id, employee_name: d.employee_name, role: d.role };
       save(S); $("pw").value = "";
-      location.hash = "#/home"; route();
+      var dv = getDev();
+      if (forceSet || !dv || dv.emp !== String(S.employee_id).toLowerCase()) { pending = true; forceSet = false; show("login"); lgMode("set"); $("pin1").value = ""; $("pin2").value = ""; }
+      else enter();
     } catch (x) { er.textContent = x.message; }
     b.disabled = false; b.textContent = "Sign in";
   });
