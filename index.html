@@ -9,7 +9,7 @@
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -18,7 +18,7 @@
 <section id="login" class="lg hidden">
   <div class="lg-left">
     <div class="form">
-      <img class="logo" src="icons/icon.svg" width="46" height="46" alt="Atlas">
+      <div class="lgbrand"><img class="logo" src="icons/icon.svg" width="46" height="46" alt=""><span class="wm big" aria-label="atlas"><i>a</i><i>t</i><i>l</i><i>a</i><i>s</i></span></div>
       <h1 class="h1">Sign in to Atlas</h1>
       <p class="mut" style="font-size:15px;line-height:1.55;margin:0">Use the same Employee ID and password as Staffly. You sign in once and every app opens.</p>
       <form id="loginForm" class="beam fc" autocomplete="on">
@@ -43,7 +43,7 @@
 <!-- home -->
 <div id="app" class="at hidden">
   <header class="nav">
-    <a class="brand" href="#/home"><img src="icons/icon.svg" width="34" height="34" alt="">Atlas</a>
+    <a class="brand" href="#/home"><img src="icons/icon.svg" width="34" height="34" alt=""><span class="wm" aria-label="atlas"><i>a</i><i>t</i><i>l</i><i>a</i><i>s</i></span></a>
     <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="gs" placeholder="Jump to an app…" aria-label="Search apps" autocomplete="off"><span class="kbd">Ctrl K</span></label>
     <div class="me"><div class="av" id="meAv"></div><div><b id="meName" style="font-weight:600"></b><div id="meSub" style="color:var(--mute);font-size:12px"></div></div><button class="ib" id="signOut" aria-label="Sign out" title="Sign out"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></button></div>
   </header>
@@ -53,7 +53,7 @@
 <!-- app in a frame -->
 <div id="frameView" class="fr hidden">
   <header class="bar">
-    <a class="back" href="#/home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><img src="icons/icon.svg" width="24" height="24" alt="">Atlas</a>
+    <a class="back" href="#/home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><img src="icons/icon.svg" width="24" height="24" alt=""><span class="wm" aria-label="atlas"><i>a</i><i>t</i><i>l</i><i>a</i><i>s</i></span></a>
     <span class="sep"></span>
     <span class="ic" id="frIcon"></span>
     <b id="frName" style="font-weight:600;font-size:15px"></b>
