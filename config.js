@@ -7,7 +7,7 @@ window.ATLAS_CONFIG = {
   // The apps shown on the home screen. status: "live" opens the app, "soon" shows Coming soon.
   // Put each app's web address in "url". An empty url shows a "not set yet" message.
   apps: [
-    { id: "staffly", name: "Staffly", desc: "Attendance, leave and payroll for every location.", url: "", status: "live", icon: "pin", tint: "#e4f1ef", color: "#0f766e" },
+    { id: "staffly", name: "Staffly", desc: "Attendance, leave and payroll for every location.", url: "https://toliflow.vercel.app", status: "live", icon: "pin", tint: "#e4f1ef", color: "#0f766e" },
     { id: "o2d", name: "Order to Dispatch", desc: "From PO to delivery, step by step. Okhla and Gurgaon.", url: "https://dcc-order-to-dispatch.vercel.app", status: "live", icon: "truck", tint: "#fdecef", color: "#c8102e" },
     { id: "stock", name: "Stock", desc: "What is on the shelf, in every warehouse.", url: "", status: "soon", icon: "stock", tint: "#efefea", color: "#8a8a93" },
     { id: "purchase", name: "Purchase FMS", desc: "Purchase orders and follow-ups.", url: "", status: "soon", icon: "cart", tint: "#efefea", color: "#8a8a93" },
