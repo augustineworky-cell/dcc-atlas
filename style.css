@@ -131,16 +131,17 @@ label.f{display:grid;gap:7px;font:500 13px Inter;color:var(--ink2)}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important}}
 
-/* wordmark: each letter takes an app colour */
-.wm{font:700 22px/1 Poppins,Inter,sans-serif;letter-spacing:-.03em;display:inline-flex}
-.wm i{font-style:normal}
-.wm i:nth-child(1){color:#c8102e}.wm i:nth-child(2){color:#0f766e}.wm i:nth-child(3){color:#e0a100}.wm i:nth-child(4){color:#111113}.wm i:nth-child(5){color:#7c3aed}
-.wm.big{font-size:34px}
-.back .wm{font-size:17px}
-.lgbrand{display:flex;align-items:center;gap:14px}
-
-.pinin{text-align:center;font-size:24px;letter-spacing:.7em;padding-left:.7em}
-.pinin::placeholder{letter-spacing:.5em}
-.lnks{display:flex;justify-content:space-between;gap:12px}
-.lnk{background:none;border:0;padding:4px 0;font:500 13px Inter;color:var(--mute);cursor:pointer;text-decoration:underline;text-underline-offset:3px}
-.lnk:hover{color:var(--ink)}
+/* wordmark: sticker tiles, one app colour per letter */
+.wm{display:inline-flex;align-items:center;position:relative}
+.wm i{font-style:normal;display:grid;place-items:center;width:24px;height:24px;border-radius:7px;border:2px solid #111;box-shadow:2px 2px 0 #111;color:#fff;font:800 14px/1 Inter,sans-serif;margin-right:3px}
+.wm i:nth-child(1){background:#e5173a;transform:rotate(-6deg)}
+.wm i:nth-child(2){background:#0f9d8a;transform:rotate(4deg)}
+.wm i:nth-child(3){background:#f2b705;transform:rotate(-3deg)}
+.wm i:nth-child(4){background:#2563eb;transform:rotate(5deg)}
+.wm i:nth-child(5){background:#7c3aed;transform:rotate(-5deg)}
+.wm.big i{width:50px;height:50px;border-radius:14px;border-width:4px;box-shadow:4px 4px 0 #111;font-size:30px;margin-right:5px;-webkit-text-stroke:1.5px #111;paint-order:stroke fill}
+.wm .spk{position:absolute}
+.wm .s1{left:-30px;top:-16px}.wm .s2{right:-18px;bottom:-14px}
+.back .wm i{width:20px;height:20px;border-radius:6px;font-size:12px;border-width:1.5px;box-shadow:1.5px 1.5px 0 #111;margin-right:2px}
+.lgbrand{display:flex;align-items:center;gap:26px}
+.logo{border:0}
