@@ -12,6 +12,6 @@ window.ATLAS_CONFIG = {
     { id: "stock", name: "Stock", desc: "What is on the shelf, in every warehouse.", url: "", status: "soon", icon: "stock", tint: "#efefea", color: "#8a8a93" },
     { id: "purchase", name: "Purchase FMS", desc: "Purchase orders and follow-ups.", url: "", status: "soon", icon: "cart", tint: "#efefea", color: "#8a8a93" },
     { id: "collections", name: "Collections", desc: "Who owes what, and who to call.", url: "", status: "soon", icon: "wallet", tint: "#efefea", color: "#8a8a93" },
-    { id: "brand", name: "Brand portal", desc: "Each brand sees only its own sales.", url: "", status: "soon", icon: "chart", tint: "#efefea", color: "#8a8a93" }
+    { id: "brand", name: "Brand portal", desc: "Each brand sees only its own sales.", url: "https://dcc-brandview.vercel.app", status: "live", icon: "chart", tint: "#eee9fb", color: "#7c3aed" }
   ]
 };
