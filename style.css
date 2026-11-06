@@ -139,3 +139,49 @@ label.f{display:grid;gap:7px;font:500 13px Inter;color:var(--ink2)}
 .back .wmk{height:20px}
 .lockup{display:block;width:min(300px,78%);height:auto;margin:0 0 6px -6px}
 .lgbrand{display:block}
+
+
+/* ===== Atles night theme: sits on the living background ===== */
+:root{--ink:#f6e6e1;--ink2:#e3cfc9;--mute:#bba39d;--line:rgba(233,201,195,.2);--paper:#120c0a;--surf:rgba(22,14,12,.76);--field:rgba(12,8,7,.62)}
+body{background:#0e0908;color:var(--ink)}
+.lg,.at{position:relative;z-index:1;background:transparent}
+.fr{background:transparent;z-index:20}
+.lg-left{background:linear-gradient(90deg,rgba(10,6,5,.6),rgba(10,6,5,0))}
+.lg-right{background:transparent;border-left:0}
+.topo path{stroke:rgba(233,201,195,.22)}
+.fc,.card,.panel,.sapp,.pin{background:var(--surf);border-color:var(--line);box-shadow:0 20px 50px -24px rgba(0,0,0,.7)}
+.card.soon,.sapp.soon,.pin.soon{background:rgba(22,14,12,.45);box-shadow:none}
+.card:hover{border-color:rgba(233,201,195,.42);box-shadow:0 22px 44px -22px rgba(0,0,0,.8)}
+.inp{background:var(--field);color:var(--ink);border-color:var(--line)}
+.inp::placeholder{color:#8d7b76}
+.inp:focus{border-color:#b3857f;box-shadow:0 0 0 4px rgba(179,133,127,.25)}
+.btn{background:#f6e6e1;color:#3a312d}
+.btn:hover{box-shadow:0 12px 24px -14px rgba(0,0,0,.8)}
+.btn.sec{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.nav{background:rgba(16,10,9,.8);-webkit-backdrop-filter:none;backdrop-filter:none;border-bottom-color:var(--line)}
+.search{background:var(--field);border-color:var(--line)}
+.search:focus-within{border-color:#b3857f;box-shadow:0 0 0 4px rgba(179,133,127,.2)}
+.kbd{background:rgba(233,201,195,.08);color:var(--mute);border-color:var(--line)}
+.ib{background:var(--surf);color:var(--ink2);border-color:var(--line)}
+.ib:hover{background:rgba(233,201,195,.14)}
+.av{background:#b3857f;color:#241915}
+.chip{background:rgba(233,201,195,.12);color:#e9c9c3}
+.chip.ok,.tag{background:rgba(95,190,150,.16);color:#a6e3c5}
+.tag.g{background:rgba(233,201,195,.12);color:#e9c9c3}
+.bar{background:rgba(16,10,9,.86);border-bottom-color:var(--line)}
+.back,.sw{background:rgba(233,201,195,.08);color:var(--ink);border-color:var(--line)}
+.back:hover,.sw:hover{background:rgba(233,201,195,.16)}
+.pop{background:#1a1210;border-color:var(--line)}
+.pop a:hover{background:rgba(233,201,195,.1)}
+.frame{border-color:var(--line)}
+.toast{background:#f6e6e1;color:#3a312d}
+.hero h1,.h1{text-shadow:0 2px 28px rgba(0,0,0,.55)}
+.sub,.eyebrow,.mut{text-shadow:0 1px 14px rgba(0,0,0,.5)}
+.globe svg [fill="#fff"]{fill:rgba(233,201,195,.05)}
+.globe svg [stroke="#e2e2db"],.globe svg [stroke="#e8e8e2"],.globe svg [stroke="#d6d6cf"],.mer ellipse{stroke:rgba(233,201,195,.3)}
+.globe svg [fill="#3a312d"]{fill:#e9c9c3}
+.pinin{text-align:center;letter-spacing:.5em;font-size:22px}
+.lnks{display:flex;justify-content:space-between;gap:10px}
+.lnk{background:none;border:0;padding:4px 0;color:var(--mute);font:500 13px Inter;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.lnk:hover{color:var(--ink)}
+.err{color:#ff9aa6}

@@ -4,21 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Atles · DCC Supply Chain</title>
-<meta name="theme-color" content="#faf6f4">
+<meta name="theme-color" content="#120c0a">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icons/logo-192.png" type="image/png">
 <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="bg.css">
 </head>
 <body>
+
+<!-- living night scenery behind everything -->
+<div id="bg" aria-hidden="true"><div class="world" id="bgw">
+<div class="layer" data-d="0.05"><img alt="" decoding="async" src="bg/sky.jpg" style="left:-8%;top:-8%;width:116%;height:116%"><div class="moonglow"></div></div>
+<div class="layer" data-d="0.1"><div class="ctrack" style="top:8.333%;height:50.926%;animation-duration:75s"><img alt="" decoding="async" src="bg/clouds.webp" style=""><img alt="" decoding="async" src="bg/clouds.webp" style=""></div></div>
+<div class="layer" data-d="0.16"><div class="ctrack" style="top:13.889%;height:34.259%;animation-duration:42s"><img alt="" decoding="async" src="bg/clouds2.webp" style=""><img alt="" decoding="async" src="bg/clouds2.webp" style=""></div></div>
+<div class="layer" data-d="0.2"><div class="drift" style="--dx:1%;animation-duration:24s"><img alt="" decoding="async" src="bg/ridge0.webp" style="top:43.519%;height:28.241%"></div></div>
+<div class="layer" data-d="0.32"><div class="drift" style="--dx:1.5%;animation-duration:21s"><img alt="" decoding="async" src="bg/ridge1.webp" style="top:52.315%;height:26.389%"></div></div>
+<div class="layer" data-d="0.38"><div class="fogw" style="top:59.259%;height:27.778%;animation-delay:-20s"><img alt="" decoding="async" src="bg/fog1.webp" style="top:0;height:100%"></div></div>
+<div class="layer" data-d="0.46"><div class="drift" style="--dx:2%;animation-duration:18s"><img alt="" decoding="async" src="bg/ridge2.webp" style="top:61.111%;height:24.537%"></div></div>
+<div class="layer" data-d="0.62"><div class="drift" style="--dx:2.8%;animation-duration:15s"><img alt="" decoding="async" src="bg/ridge3.webp" style="top:62.963%;height:30.093%"><img class="sway" alt="" decoding="async" src="bg/treesA3.webp" style="top:62.963%;height:18.796%;animation-duration:4.0s;animation-delay:-0.0s"><img class="sway" alt="" decoding="async" src="bg/treesB3.webp" style="top:62.963%;height:18.796%;animation-duration:5.3s;animation-delay:-1.7s"></div></div>
+<div class="layer" data-d="0.6799999999999999"><div class="fogw" style="top:73.148%;height:27.778%;animation-delay:-40s"><img alt="" decoding="async" src="bg/fog2.webp" style="top:0;height:100%"></div></div>
+<div class="layer" data-d="0.85"><div class="drift" style="--dx:3.6%;animation-duration:13s"><img alt="" decoding="async" src="bg/ridge4.webp" style="top:71.759%;height:28.241%"><img class="sway" alt="" decoding="async" src="bg/treesA4.webp" style="top:71.759%;height:17.407%;animation-duration:4.2s;animation-delay:-0.0s"><img class="sway" alt="" decoding="async" src="bg/treesB4.webp" style="top:71.759%;height:17.407%;animation-duration:5.6s;animation-delay:-1.7s"></div></div>
+<div class="layer" data-d="1.25"><div class="drift" style="--dx:4.6%;animation-duration:11s"><img alt="" decoding="async" src="bg/ridge5.webp" style="top:81.296%;height:18.704%"><img class="sway" alt="" decoding="async" src="bg/treesA5.webp" style="top:81.296%;height:14.815%;animation-duration:4.4s;animation-delay:-0.0s"><img class="sway" alt="" decoding="async" src="bg/treesB5.webp" style="top:81.296%;height:14.815%;animation-duration:5.8s;animation-delay:-1.7s"></div></div>
+<div class="layer" data-d="1.25"><div class="ground"></div></div>
+</div><div class="vig"></div></div>
 
 <!-- sign in -->
 <section id="login" class="lg hidden">
   <div class="lg-left">
     <div class="form">
-      <img class="lockup" src="icons/lockup.png" alt="DCC Atles">
+      <img class="lockup" src="icons/lockup-light.png" alt="DCC Atles">
       <h1 class="h1" id="lgTitle">Sign in to Atles</h1>
       <p class="mut" id="lgSub" style="font-size:15px;line-height:1.55;margin:0">Use the same Employee ID and password as Staffly. You sign in once and every app opens.</p>
       <form id="loginForm" class="beam fc" autocomplete="on">
@@ -56,7 +73,7 @@
 <!-- home -->
 <div id="app" class="at hidden">
   <header class="nav">
-    <a class="brand" href="#/home"><img src="icons/logo-512.png" width="34" height="34" alt=""><img class="wmk" src="icons/atles-word.png" alt="Atles"></a>
+    <a class="brand" href="#/home"><img src="icons/logo-512.png" width="34" height="34" alt=""><img class="wmk" src="icons/atles-word-light.png" alt="Atles"></a>
     <label class="search"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg><input id="gs" placeholder="Jump to an app…" aria-label="Search apps" autocomplete="off"><span class="kbd">Ctrl K</span></label>
     <div class="me"><div class="av" id="meAv"></div><div><b id="meName" style="font-weight:600"></b><div id="meSub" style="color:var(--mute);font-size:12px"></div></div><button class="ib" id="signOut" aria-label="Sign out" title="Sign out"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></button></div>
   </header>
@@ -66,7 +83,7 @@
 <!-- app in a frame -->
 <div id="frameView" class="fr hidden">
   <header class="bar">
-    <a class="back" href="#/home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><img src="icons/logo-512.png" width="24" height="24" alt=""><img class="wmk" src="icons/atles-word.png" alt="Atles"></a>
+    <a class="back" href="#/home"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg><img src="icons/logo-512.png" width="24" height="24" alt=""><img class="wmk" src="icons/atles-word-light.png" alt="Atles"></a>
     <span class="sep"></span>
     <span class="ic" id="frIcon"></span>
     <b id="frName" style="font-weight:600;font-size:15px"></b>
@@ -83,5 +100,6 @@
 
 <script src="config.js"></script>
 <script src="app.js"></script>
+<script src="bg.js"></script>
 </body>
 </html>

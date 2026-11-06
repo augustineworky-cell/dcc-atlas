@@ -1,0 +1,22 @@
+/* Atles living background: pre-rendered image layers moved only with transforms (GPU), no filters, so it stays light */
+#bg{position:fixed;inset:0;overflow:hidden;z-index:0;pointer-events:none;background:linear-gradient(180deg,#120c0a,#2a1d1a 60%,#5b3f3a);contain:strict}
+#bg .world{position:absolute;left:50%;top:50%;width:max(100vw,177.78vh);aspect-ratio:16/9;transform:translate(-50%,-50%) scale(1.2);will-change:transform;transform-origin:50% 55%}
+#bg .layer{position:absolute;inset:0;will-change:transform;backface-visibility:hidden}
+#bg img{position:absolute;left:0;width:100%;display:block;user-select:none;-webkit-user-drag:none}
+#bg .ctrack{position:absolute;left:0;width:200%;display:flex;animation:bgcl linear infinite;will-change:transform}
+#bg .ctrack img{position:static;width:50%;flex:none}
+@keyframes bgcl{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+#bg .sway{transform-origin:50% 100%;animation:bgsw 5s ease-in-out infinite alternate;will-change:transform}
+@keyframes bgsw{from{transform:skewX(-3.2deg)}to{transform:skewX(3.2deg)}}
+#bg .drift{position:absolute;inset:0;animation:bgdr ease-in-out infinite alternate;will-change:transform}
+@keyframes bgdr{from{transform:translate3d(calc(var(--dx) * -1),0,0)}to{transform:translate3d(var(--dx),0,0)}}
+#bg .fogw{position:absolute;left:-15%;width:130%;animation:bgfg 48s ease-in-out infinite alternate;will-change:transform}
+#bg .fogw img{width:100%;left:0}
+@keyframes bgfg{from{transform:translate3d(-7%,0,0)}to{transform:translate3d(7%,0,0)}}
+#bg .moonglow{position:absolute;left:72.9%;top:26.9%;width:34%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,rgba(250,215,205,.55) 0%,rgba(235,180,170,.22) 24%,transparent 62%);animation:bgmg 5s ease-in-out infinite alternate}
+@keyframes bgmg{from{opacity:.55;transform:translate(-50%,-50%) scale(.94)}to{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
+#bg .ground{position:absolute;left:-10%;right:-10%;top:99.8%;height:30%;background:#0b0706}
+#bg .vig{position:absolute;inset:0;background:radial-gradient(125% 100% at 50% 46%,transparent 52%,rgba(8,5,4,.6))}
+/* while a full-screen app is open the scenery pauses and costs nothing */
+.inapp #bg *{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){#bg *{animation:none!important}}
