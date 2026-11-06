@@ -1,4 +1,4 @@
-/* DCC Atlas: one sign-in (Staffly Employee ID + password), every company app. */
+/* DCC Atles: one sign-in (Staffly Employee ID + password), every company app. */
 (function () {
   "use strict";
   var CFG = window.ATLAS_CONFIG;
@@ -93,11 +93,11 @@
       '<circle cx="260" cy="220" r="150" fill="#fff" stroke="#e2e2db"/>' +
       '<g class="mer"><ellipse cx="260" cy="220" rx="150" ry="150"/><ellipse cx="260" cy="220" rx="105" ry="150" style="animation-delay:-4s"/><ellipse cx="260" cy="220" rx="60" ry="150" style="animation-delay:-8s"/></g>' +
       '<path d="M110 220h300M130 150h260M130 290h260" stroke="#e8e8e2"/>' +
-      '<g class="orb1"><ellipse cx="260" cy="220" rx="215" ry="70" stroke="#d6d6cf" stroke-dasharray="3 6" transform="rotate(-18 260 220)"/><circle cx="475" cy="220" r="5" fill="#c8102e" transform="rotate(-18 260 220)"/></g>' +
-      '<g class="orb2"><ellipse cx="260" cy="220" rx="185" ry="48" stroke="#d6d6cf" stroke-dasharray="3 6" transform="rotate(24 260 220)"/><circle cx="75" cy="220" r="4" fill="#0f766e" transform="rotate(24 260 220)"/></g>' +
-      '<circle class="pg" cx="300" cy="170" r="6" fill="#c8102e" fill-opacity=".3"/><circle cx="300" cy="170" r="4" fill="#c8102e"/>' +
-      '<circle class="pg" cx="215" cy="262" r="6" fill="#0f766e" fill-opacity=".3" style="animation-delay:-1.4s"/><circle cx="215" cy="262" r="4" fill="#0f766e"/>' +
-      '<path d="M215 262 Q 250 170 300 170" stroke="#c8102e" stroke-opacity=".55" stroke-width="1.3" stroke-dasharray="4 6" style="animation:flow 4s linear infinite"/>' +
+      '<g class="orb1"><ellipse cx="260" cy="220" rx="215" ry="70" stroke="#d6d6cf" stroke-dasharray="3 6" transform="rotate(-18 260 220)"/><circle cx="475" cy="220" r="5" fill="#a8706a" transform="rotate(-18 260 220)"/></g>' +
+      '<g class="orb2"><ellipse cx="260" cy="220" rx="185" ry="48" stroke="#d6d6cf" stroke-dasharray="3 6" transform="rotate(24 260 220)"/><circle cx="75" cy="220" r="4" fill="#3a312d" transform="rotate(24 260 220)"/></g>' +
+      '<circle class="pg" cx="300" cy="170" r="6" fill="#a8706a" fill-opacity=".3"/><circle cx="300" cy="170" r="4" fill="#a8706a"/>' +
+      '<circle class="pg" cx="215" cy="262" r="6" fill="#3a312d" fill-opacity=".3" style="animation-delay:-1.4s"/><circle cx="215" cy="262" r="4" fill="#3a312d"/>' +
+      '<path d="M215 262 Q 250 170 300 170" stroke="#a8706a" stroke-opacity=".55" stroke-width="1.3" stroke-dasharray="4 6" style="animation:flow 4s linear infinite"/>' +
       "</svg>" + pins + "</div>";
   }
 
@@ -127,7 +127,7 @@
     if (!list.length) html += '<div class="empty">No app matches that.</div>';
     if (live.length) html += '<div class="sec"><b>Your apps</b><span class="mut" style="font-size:13px">' + live.length + " available</span></div><div class=\"grid\">" + live.map(tile).join("") + "</div>";
     if (soon.length) html += '<div class="sec"><b>On the way</b></div><div class="grid">' + soon.map(function (a, i) { return tile(a, i + live.length); }).join("") + "</div>";
-    html += '<div class="panel beam" id="installCard" style="margin-top:46px;' + (deferredInstall ? "" : "display:none") + '"><div style="flex:1;min-width:220px"><b>Install Atlas on this device</b><div class="ds">Opens like a normal app, with its own icon. Works on PC and phone.</div></div><button class="btn" id="installBtn" type="button">Install</button></div>';
+    html += '<div class="panel beam" id="installCard" style="margin-top:46px;' + (deferredInstall ? "" : "display:none") + '"><div style="flex:1;min-width:220px"><b>Install Atles on this device</b><div class="ds">Opens like a normal app, with its own icon. Works on PC and phone.</div></div><button class="btn" id="installBtn" type="button">Install</button></div>';
     html += '<div class="foot"><span>Signed in as ' + esc(S.employee_name || "") + " · " + esc(S.employee_id || "") + "</span></div>";
     $("view").innerHTML = html;
     var ib = $("installBtn");
@@ -149,7 +149,7 @@
     }).join("");
     var f = $("frFrame");
     if (f.dataset.app !== id) { f.dataset.app = id; f.src = a.url; }
-    document.title = a.name + " · Atlas";
+    document.title = a.name + " · Atles";
   }
 
   /* hand the signed-in person to the app inside the frame (the app must listen for this) */
@@ -183,9 +183,9 @@
     $("loginForm").classList.toggle("hidden", m !== "password");
     $("pinForm").classList.toggle("hidden", m !== "pin");
     $("setForm").classList.toggle("hidden", m !== "set");
-    var t = { password: ["Sign in to Atlas", "Use the same Employee ID and password as Staffly. You sign in once and every app opens."],
-      pin: ["Welcome back" + (first ? ", " + first : ""), "Enter your 4-digit PIN to open Atlas."],
-      set: ["Set a 4-digit PIN", "Next time, open Atlas with this PIN instead of your password. If you forget it, sign in with your password and set a new one."] }[m];
+    var t = { password: ["Sign in to Atles", "Use the same Employee ID and password as Staffly. You sign in once and every app opens."],
+      pin: ["Welcome back" + (first ? ", " + first : ""), "Enter your 4-digit PIN to open Atles."],
+      set: ["Set a 4-digit PIN", "Next time, open Atles with this PIN instead of your password. If you forget it, sign in with your password and set a new one."] }[m];
     $("lgTitle").textContent = t[0]; $("lgSub").textContent = t[1];
     ["loginErr", "pinErr", "setErr"].forEach(function (i) { $(i).textContent = ""; });
     var f = { password: "eid", pin: "pinIn", set: "pin1" }[m];
@@ -193,7 +193,7 @@
   }
   function showLogin() { var d = getDev(); lgMode(d && d.secret ? "pin" : "password"); }
   function enter() { pending = false; forceSet = false; location.hash = "#/home"; route(); }
-  function deviceLabel() { return "Atlas on " + (/Mobi|Android|iPhone/i.test(navigator.userAgent) ? "phone" : "PC"); }
+  function deviceLabel() { return "Atles on " + (/Mobi|Android|iPhone/i.test(navigator.userAgent) ? "phone" : "PC"); }
 
   $("pinIn").addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); if (this.value.length === 4) $("pinForm").requestSubmit(); });
   $("pin1").addEventListener("input", function () { this.value = this.value.replace(/\D/g, ""); });
@@ -241,12 +241,12 @@
   function route() {
     var h = location.hash || "";
     $("swPop").classList.add("hidden");
-    if (!S || pending) { show("login"); document.title = "Atlas · DCC Supply Chain"; if (!pending) showLogin(); return; }
+    if (!S || pending) { show("login"); document.title = "Atles · DCC Supply Chain"; if (!pending) showLogin(); return; }
     $("meName").textContent = S.employee_name || ""; $("meSub").textContent = S.employee_id || "";
     $("meAv").textContent = initials(S.employee_name);
     var m = h.match(/^#\/app\/([\w-]+)/);
     if (m) return openFrame(m[1]);
-    show("home"); document.title = "Atlas · DCC Supply Chain";
+    show("home"); document.title = "Atles · DCC Supply Chain";
     renderHome($("gs").value);
     window.scrollTo(0, 0);
   }
@@ -254,7 +254,7 @@
 
   /* ---------- install (PWA) ---------- */
   window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferredInstall = e; var c = $("installCard"); if (c) c.style.display = ""; });
-  window.addEventListener("appinstalled", function () { deferredInstall = null; var c = $("installCard"); if (c) c.style.display = "none"; toast("Atlas installed"); });
+  window.addEventListener("appinstalled", function () { deferredInstall = null; var c = $("installCard"); if (c) c.style.display = "none"; toast("Atles installed"); });
   async function doInstall() {
     if (!deferredInstall) return;
     deferredInstall.prompt();

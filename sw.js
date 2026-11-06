@@ -1,5 +1,5 @@
 /* Keeps the Atlas shell available and makes it installable. Data is never cached. */
-var V = "atlas-v6";
+var V = "atlas-v7";
 var SHELL = ["./", "index.html", "style.css", "app.js", "config.js", "icons/logo-192.png"];
 self.addEventListener("install", function (e) { e.waitUntil(caches.open(V).then(function (c) { return c.addAll(SHELL); }).then(function () { return self.skipWaiting(); })); });
 self.addEventListener("activate", function (e) { e.waitUntil(caches.keys().then(function (k) { return Promise.all(k.filter(function (x) { return x !== V; }).map(function (x) { return caches.delete(x); })); }).then(function () { return self.clients.claim(); })); });
