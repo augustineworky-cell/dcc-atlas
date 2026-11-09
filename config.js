@@ -9,7 +9,7 @@ window.ATLAS_CONFIG = {
   apps: [
     { id: "staffly", name: "Staffly", desc: "Attendance, leave and payroll for every location.", url: "https://toliflow.vercel.app", status: "live", icon: "pin", tint: "#e4f1ef", color: "#0f766e" },
     { id: "o2d", name: "Order to Dispatch", desc: "From PO to delivery, step by step. Okhla and Gurgaon.", url: "https://dcc-order-to-dispatch.vercel.app", status: "live", icon: "truck", tint: "#fdecef", color: "#c8102e" },
-    { id: "stock", name: "Stock", desc: "What is on the shelf, in every warehouse.", url: "", status: "soon", icon: "stock", tint: "#efefea", color: "#8a8a93" },
+    { id: "ims", name: "IMS GoodsGuru", desc: "Live stock across Okhla, Chattarpur and Gurgaon.", url: "https://dcc-ims.vercel.app", status: "live", icon: "stock", tint: "#fdf0dc", color: "#b45309" },
     { id: "purchase", name: "Purchase FMS", desc: "Purchase orders and follow-ups.", url: "", status: "soon", icon: "cart", tint: "#efefea", color: "#8a8a93" },
     { id: "collections", name: "Collections", desc: "Who owes what, and who to call.", url: "", status: "soon", icon: "wallet", tint: "#efefea", color: "#8a8a93" },
     { id: "brand", name: "Brand portal", desc: "Each brand sees only its own sales.", url: "https://dcc-brandview.vercel.app", status: "live", icon: "chart", tint: "#eee9fb", color: "#7c3aed" }
