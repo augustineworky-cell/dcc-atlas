@@ -4,6 +4,10 @@ window.ATLAS_CONFIG = {
   stafflyUrl: "https://bpwpxhsdmbkymhpjsfej.supabase.co",
   stafflyKey: "sb_publishable_-CSLD4npu9crafP-Rq7-Ug_IZN2Zh1_",
 
+  // Guest ID for demos and portfolio shows. Only a scrambled (PBKDF2) copy of the password is stored here.
+  // "until" switches the guest ID off automatically after that moment.
+  guest: { id: "GUEST", name: "Guest", salt: "569ec8d8a3a6186b", iter: 150000, hash: "9720587b0fad67ad3797c1937d48127d82a937837db2f31878f46145be6af8ac", until: "2026-11-24T00:00:00+05:30" },
+
   // The apps shown on the home screen. status: "live" opens the app, "soon" shows Coming soon.
   // Put each app's web address in "url". An empty url shows a "not set yet" message.
   apps: [

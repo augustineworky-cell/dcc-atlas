@@ -38,7 +38,20 @@
   function save(s) { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} }
   function clear() { try { localStorage.removeItem(KEY); } catch (e) {} }
 
+  /* guest ID: checked here against a scrambled copy of the password, no server account is touched */
+  async function guestSignIn(pw) {
+    var g = CFG.guest;
+    if (g.until && new Date() > new Date(g.until)) throw new Error("Guest access has ended.");
+    var enc = new TextEncoder();
+    var key = await crypto.subtle.importKey("raw", enc.encode(pw), "PBKDF2", false, ["deriveBits"]);
+    var bits = await crypto.subtle.deriveBits({ name: "PBKDF2", hash: "SHA-256", salt: enc.encode(g.id.toLowerCase() + ":" + g.salt), iterations: g.iter }, key, 256);
+    var hex = Array.prototype.map.call(new Uint8Array(bits), function (b) { return ("0" + b.toString(16)).slice(-2); }).join("");
+    if (hex !== g.hash) throw new Error("Employee ID or password is wrong.");
+    return { guest: true, token: null, expires_at: new Date(Date.now() + 12 * 3600 * 1000).toISOString(), employee_id: g.id, employee_name: g.name || "Guest", role: "guest" };
+  }
+  function isGuestId(eid) { return !!(CFG.guest && String(eid).toLowerCase() === CFG.guest.id.toLowerCase()); }
   async function signIn(eid, pw) {
+    if (isGuestId(eid)) return guestSignIn(pw);
     var r = await db.rpc("app_login", { p_employee_id: eid, p_password: pw });
     if (r.error) throw new Error("Cannot reach the server. Check your internet and try again.");
     var d = r.data || {};
@@ -48,6 +61,10 @@
     throw new Error("Employee ID or password is wrong.");
   }
   async function validate(s) {
+    if (s && s.guest) {
+      if (!CFG.guest || (s.expires_at && new Date(s.expires_at) < new Date()) || (CFG.guest.until && new Date() > new Date(CFG.guest.until))) return null;
+      return s;
+    }
     if (!s || !s.token) return null;
     if (s.expires_at && new Date(s.expires_at) < new Date()) return null;
     try {
@@ -123,12 +140,12 @@
     var html = '<section class="hero">' + globeHtml() +
       '<div class="eyebrow rise">DCC SUPPLY CHAIN &amp; DISTRIBUTION</div>' +
       '<h1 class="rise" style="--i:1">' + esc(hello) + (first ? ",<br>" + esc(first) + "." : ".") + "</h1>" +
-      '<p class="sub rise" style="--i:2">Every company app in one place. You are already signed in, so open any app and start working.</p></section>';
+      '<p class="sub rise" style="--i:2">' + (S.guest ? "A look at the DCC systems, all in one place. Open any app to explore it." : "Every company app in one place. You are already signed in, so open any app and start working.") + '</p></section>';
     if (!list.length) html += '<div class="empty">No app matches that.</div>';
     if (live.length) html += '<div class="sec"><b>Your apps</b><span class="mut" style="font-size:13px">' + live.length + " available</span></div><div class=\"grid\">" + live.map(tile).join("") + "</div>";
     if (soon.length) html += '<div class="sec"><b>On the way</b></div><div class="grid">' + soon.map(function (a, i) { return tile(a, i + live.length); }).join("") + "</div>";
     html += '<div class="panel beam" id="installCard" style="margin-top:46px;' + (deferredInstall ? "" : "display:none") + '"><div style="flex:1;min-width:220px"><b>Install Atles on this device</b><div class="ds">Opens like a normal app, with its own icon. Works on PC and phone.</div></div><button class="btn" id="installBtn" type="button">Install</button></div>';
-    html += '<div class="foot"><span>Signed in as ' + esc(S.employee_name || "") + " · " + esc(S.employee_id || "") + "</span></div>";
+    html += '<div class="foot"><span>' + (S.guest ? "Guest preview" : "Signed in as " + esc(S.employee_name || "") + " · " + esc(S.employee_id || "")) + "</span></div>";
     $("view").innerHTML = html;
     var ib = $("installBtn");
     if (ib) ib.onclick = doInstall;
@@ -160,7 +177,7 @@
     if (!o || !$("frFrame").contentWindow) return;
     $("frFrame").contentWindow.postMessage({
       type: "atlas:session",
-      employee_id: S.employee_id, employee_name: S.employee_name, role: S.role,
+      employee_id: S.employee_id, employee_name: S.employee_name, role: S.role, guest: !!S.guest,
       staffly: { url: CFG.stafflyUrl, token: S.token, expires_at: S.expires_at }
     }, o);
   }
@@ -242,7 +259,7 @@
     var h = location.hash || "";
     $("swPop").classList.add("hidden");
     if (!S || pending) { show("login"); document.title = "Atles · DCC Supply Chain"; if (!pending) showLogin(); return; }
-    $("meName").textContent = S.employee_name || ""; $("meSub").textContent = S.employee_id || "";
+    $("meName").textContent = S.employee_name || ""; $("meSub").textContent = S.guest ? "Guest preview" : (S.employee_id || "");
     $("meAv").textContent = initials(S.employee_name);
     var m = h.match(/^#\/app\/([\w-]+)/);
     if (m) return openFrame(m[1]);
@@ -270,7 +287,9 @@
     try {
       var d = await signIn($("eid").value.trim(), $("pw").value);
       S = { token: d.token, expires_at: d.expires_at, employee_id: d.employee_id, employee_name: d.employee_name, role: d.role };
+      if (d.guest) S.guest = true;
       save(S); $("pw").value = "";
+      if (S.guest) { enter(); b.disabled = false; b.textContent = "Sign in"; return; }
       var dv = getDev();
       if (forceSet || !dv || dv.emp !== String(S.employee_id).toLowerCase()) { pending = true; forceSet = false; show("login"); lgMode("set"); $("pin1").value = ""; $("pin2").value = ""; }
       else enter();
