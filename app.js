@@ -22,7 +22,8 @@
     stock: '<path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
     cart: '<path d="M3 4h2l2.2 11h10.6L20 7H6"/><circle cx="9" cy="19" r="1.5"/><circle cx="17" cy="19" r="1.5"/>',
     wallet: '<path d="M3 7a2 2 0 012-2h13v4"/><rect x="3" y="7" width="18" height="13" rx="2"/><circle cx="16.5" cy="13.5" r="1.2"/>',
-    chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>'
+    chart: '<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>',
+    map: '<path d="M9 4L3 6.5v13L9 17l6 3 6-2.5v-13L15 7z"/><path d="M9 4v13M15 7v13"/>'
   };
   function icon(name, color, size) {
     return '<svg width="' + (size || 22) + '" height="' + (size || 22) + '" viewBox="0 0 24 24" fill="none" stroke="' + color + '" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || "") + "</svg>";
@@ -31,7 +32,7 @@
   function initials(n) { var p = String(n || "?").trim().split(/\s+/); return ((p[0] || "?")[0] + (p.length > 1 ? p[p.length - 1][0] : "")).toUpperCase(); }
   function toast(m) { var t = $("toast"); t.textContent = m; t.classList.remove("hidden"); clearTimeout(toast._t); toast._t = setTimeout(function () { t.classList.add("hidden"); }, 3200); }
   function appById(id) { return CFG.apps.filter(function (a) { return a.id === id; })[0]; }
-  function originOf(u) { try { return new URL(u).origin; } catch (e) { return null; } }
+  function originOf(u) { try { return new URL(u, location.href).origin; } catch (e) { return null; } }
 
   /* ---------- session ---------- */
   function load() { try { return JSON.parse(localStorage.getItem(KEY) || "null"); } catch (e) { return null; } }

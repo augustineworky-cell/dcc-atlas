@@ -66,6 +66,7 @@ h1{margin:6px 0 6px;font:400 clamp(30px,4.4vw,48px)/1.02 'Cormorant Garamond',Ge
 .pin .dot::after{content:"";position:absolute;inset:-9px;border-radius:50%;border:2px solid var(--pc,#e9c9c3);opacity:0;animation:pl 2.6s ease-out infinite}
 @keyframes pl{0%{transform:scale(.4);opacity:.8}100%{transform:scale(2.3);opacity:0}}
 .pin.on .c,.pin:hover .c{background:#f6e6e1;border-color:#f6e6e1}.pin.on b,.pin:hover b{color:#2b201d}.pin.on small,.pin:hover small{color:#6b5a55}
+.embed .brand,.embed .tab{display:none}.embed .title{top:20px}.embed .nav{padding-top:14px}
 @media(prefers-reduced-motion:reduce){.pin .dot::after{animation:none}}
 @media(max-width:720px){.hud,.note{display:none}.modes button{padding:6px 9px;font-size:12px}.panel{top:auto;height:58vh;bottom:70px;transform:translateY(calc(100% + 90px));width:calc(100vw - 24px);right:12px}.panel.open{transform:none}.title{top:62px}.tab{padding:8px 9px}}
 </style></head><body>
@@ -100,6 +101,7 @@ var SOPS={
 /* ===== map ===== */
 var HOME={center:[77.13,28.52],zoom:10.3,pitch:55,bearing:-18};
 var STY={dark:"https://basemaps.cartocdn.com/gl/dark-matter-gl-style/style.json",map:"https://tiles.openfreemap.org/styles/liberty",sat:{version:8,glyphs:"https://tiles.openfreemap.org/fonts/{fontstack}/{range}.pbf",sources:{sat:{type:"raster",tiles:["https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"],tileSize:256,maxzoom:19,attribution:"Imagery &copy; Esri, Maxar, Earthstar Geographics"},omt:{type:"vector",url:"https://tiles.openfreemap.org/planet"}},layers:[{id:"sat",type:"raster",source:"sat",paint:{"raster-brightness-max":.85,"raster-saturation":-.1}}]}};
+try{if(/[?&]embed=1/.test(location.search))document.body.classList.add("embed")}catch(e){}
 var MODE="dark",sel=null,lastIn=performance.now();
 var map=new maplibregl.Map({container:"map",style:STY.dark,center:HOME.center,zoom:HOME.zoom,pitch:HOME.pitch,bearing:HOME.bearing,maxPitch:78,attributionControl:{compact:true}});
 var HB={};HUBS.forEach(function(h){HB[h.id]=h});
